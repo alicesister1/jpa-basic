@@ -16,9 +16,13 @@ public class JpaMain {
     tx.begin();
 
     try {
-      Member member = new Member();
-//      member.setUsername("C");
-      em.persist(member);
+      for (int i = 0; i <= 101; i++) {
+        Member member = new Member();
+        member.setUsername("member " + i);
+        em.persist(member);
+        System.out.println("member" + i + " = " + member.getId());
+      }
+
       tx.commit();
     } catch (Exception e) {
       tx.rollback();

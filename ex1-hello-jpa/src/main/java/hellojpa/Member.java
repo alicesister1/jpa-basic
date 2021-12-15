@@ -5,17 +5,17 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.TableGenerator;
+import javax.persistence.SequenceGenerator;
 
 @Entity
-@TableGenerator(
+@SequenceGenerator(
     name = "MEMBER_SEQ_GENERATOR",
-    table = "MY_SEQUENCES",
-    pkColumnValue = "MEMBER_SEQ", allocationSize = 1)
+    sequenceName = "MEMBER_SEQ",
+    initialValue = 1, allocationSize = 50)
 public class Member {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.TABLE, generator = "MEMBER_SEQ_GENERATOR")
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "MEMBER_SEQ_GENERATOR")
   private Long id;
 
   @Column(name = "name")
@@ -39,5 +39,17 @@ public class Member {
 //  private Integer temp;
 
   public Member() {
+  }
+
+  public String getUsername() {
+    return username;
+  }
+
+  public Long getId() {
+    return id;
+  }
+
+  public void setUsername(String username) {
+    this.username = username;
   }
 }
